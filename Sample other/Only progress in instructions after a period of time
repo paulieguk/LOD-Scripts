@@ -1,0 +1,53 @@
+## Scenario - There is a requirement to ensure learners cannot complete a lab until a period of time have passed.
+
+##  Setup:
+##  Create an Automated activity with the script below in adjusting vales as required.  Ensure the activity is 
+##   configured as On-Demand evaluation and blocks page navigation until passed.  If the lab is scored it would
+##   be suggested this item is not scored.
+
+## This script will use the Details API to establish the runtime of a Lab Instance.
+## The scipt will only pass/be true once the number of seconds in the $LabDurationSec variable is greater
+##  than the total lab runtime.  Because this uses the details API call the lab instance data has
+##  to be available via that API consumer.
+
+
+$result = $false
+$evidence = 'test'
+
+## Set your api key,  Be sure to remove the <>Brackets when adding the api key.
+$api_key = @{'api_key' = 'API Key here'}
+$baseURL = 'https://labondemand.com/api/v3'
+$apiCMD = 'details?labinstanceID='
+$labInstanceID = '@lab.LabInstance.Id'
+
+## Set this variable for how long you wish the lab to held in this location before the learner can press 
+##  next in the instructions. The TS and TSC varibles are used to calculate the time in minutes for easier 
+##  user communication.
+
+$labdurationsec = 300
+$ts = New-TimeSpan -Seconds $labdurationsec
+
+## Powershell setup the API Call.
+$apiCall = @{
+        Method = "Get"
+        Uri =  "$($baseURL)/$($apiCMD)$($labinstanceID)"
+        ContentType = "application/json"
+        Headers = $api_key
+    }
+
+## This is the actual API Call to get the class as it is currently.
+$apiResponse = Invoke-RestMethod @apiCall
+
+if ($apiResponse.TotalRunTime -ge $labdurationsec) {
+    $tsc = New-TimeSpan -Seconds $apiResponse.TotalRunTime
+    $evidence = "Current lab duration is $($tsc.minutes) minutes."
+    $result = $true
+    }
+    Else {
+    $tsc = New-TimeSpan -Seconds $apiResponse.TotalRunTime
+    $evidence = "Current lab runtime is $($tsc.minutes) minutes.  Once lab runtime is greater than $($ts.Minutes) minutes you can continue"
+    $result = $false
+    }
+
+$evidence
+$result
