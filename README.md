@@ -1,4 +1,4 @@
-# LODScripts
+# LOD Scripts
 
 This repsitory is a storage location for useful scripts in LOD.  These will often be used within LCA's
 
