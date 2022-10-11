@@ -11,7 +11,6 @@ $IPAddress = '192.168.10.' + (Get-Random -Minimum 10 -Maximum 250)
 # Get Interface name
 $interface = (Get-NetIPAddress)[0].interfacealias
 
-
 # Set IP Address
 New-NetIPAddress -InterfaceAlias $interface -AddressFamily IPv4 -IPAddress $IPAddress -PrefixLength 24
 sleep 2
