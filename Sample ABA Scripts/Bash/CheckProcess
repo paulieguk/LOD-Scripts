@@ -1,18 +1,15 @@
-Check for running process:
-
 # confirm that the process is running
 #!/bin/bash
 
 # Set process name in varibale below
-
 process=hv_vmbus_con
 
 processcount=$(ps -ef | grep -i "$process" | wc -l)
 
-if (test $processcount -eq 2)
-then
-RESULT=True
-else
-RESULT=False
-fi
+if (test $processcount -eq 2);
+  then
+    RESULT=True
+  else
+    RESULT=False
+  fi
 echo $RESULT
