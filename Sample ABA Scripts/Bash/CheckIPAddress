@@ -1,0 +1,16 @@
+#!/bin/bash
+
+RESULT=FALSE
+IPAddress=192.168.10.10
+
+# -q quiet 
+# -c nb of pings to perform   
+
+ping -q -c1 $IPAddress > /dev/null   
+
+if [ $? -eq 0 ] 
+then 
+    RESULT=TRUE;
+fi
+
+echo $RESULT
