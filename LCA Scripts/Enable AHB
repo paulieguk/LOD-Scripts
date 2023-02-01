@@ -1,0 +1,8 @@
+# Replace the @lab below with the correct @lab token for the Lab Resource Group Name
+$rgname = '@lab.CloudResourceGroup(RG).Name'
+# Set this variable to the VM name.  The VM name will be the same as the VM Profile name with spaces removed.
+$vmName = "azurevmtest"
+
+$vm = Get-AzVM -ResourceGroup $rgname -Name $vmName
+$vm.LicenseType = "Windows_Server"
+Update-AzVM -ResourceGroupName $rgname -VM $vm
