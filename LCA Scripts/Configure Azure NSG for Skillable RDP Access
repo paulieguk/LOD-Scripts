@@ -1,0 +1,34 @@
+$vmName = "VNName"
+$nsgname = "$vmName-nsg"
+$ruleName = "RDP"
+$rgname = '@lab.CloudResourceGroup(RG).Name'
+
+## Place the network security group configuration into a variable. ##
+$networkSecurityGroup = Get-AzNetworkSecurityGroup -Name $nsgname -ResourceGroupName $rgname
+
+## Remove the security rule. ##
+Remove-AzNetworkSecurityRuleConfig -Name $ruleName -NetworkSecurityGroup $networkSecurityGroup
+
+## Updates the network security group. ##
+#Set-AzNetworkSecurityGroup -NetworkSecurityGroup $networkSecurityGroup
+
+## Create the security rules. ##
+Add-AzNetworkSecurityRuleConfig -Name RDP01 -NetworkSecurityGroup $networkSecurityGroup `
+-Description "Skillable Allow RDP" -Access Allow -Protocol Tcp -Direction Inbound -Priority 301 `
+-SourceAddressPrefix "104.214.106.0/25" -SourcePortRange * -DestinationAddressPrefix * -DestinationPortRange 3389
+
+
+Add-AzNetworkSecurityRuleConfig -Name RDP02 -NetworkSecurityGroup $networkSecurityGroup `
+-Description "Skillable Allow RDP" -Access Allow -Protocol Tcp -Direction Inbound -Priority 302 `
+-SourceAddressPrefix "185.254.59.0/24" -SourcePortRange * -DestinationAddressPrefix * -DestinationPortRange 3389
+
+Add-AzNetworkSecurityRuleConfig -Name RDP03 -NetworkSecurityGroup $networkSecurityGroup `
+-Description "Skillable Allow RDP" -Access Allow -Protocol Tcp -Direction Inbound -Priority 303 `
+-SourceAddressPrefix "103.18.85.0/24" -SourcePortRange * -DestinationAddressPrefix * -DestinationPortRange 3389
+
+Add-AzNetworkSecurityRuleConfig -Name RDP04 -NetworkSecurityGroup $networkSecurityGroup `
+-Description "Skillable Allow RDP" -Access Allow -Protocol Tcp -Direction Inbound -Priority 304 `
+-SourceAddressPrefix "163.47.101.0/25" -SourcePortRange * -DestinationAddressPrefix * -DestinationPortRange 3389
+
+## Updates the network security group. ##
+Set-AzNetworkSecurityGroup -NetworkSecurityGroup $networkSecurityGroup 
