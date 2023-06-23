@@ -1,4 +1,4 @@
-# This script can be used in an LCA to set the IPAddress of a VM on startup.  This will pick a random forth octect ans set the IP Address.  
+# This script can be used in an LCA to set the IPAddress of a VM on startup.  This will pick a random forth octect and set the IP Address.  
 # If the IP Address state does not switch to preferred then the script will loop until an IP address does get set as prefered.
 # Author: Paul.Gregory@skillable.com
 
