@@ -8,22 +8,19 @@ $result = $false
 $FilePath = 'filename goes here'
 $Evidence = ''
 
- 
-
-        # Check if the file exists
-        if (-not (Test-Path $FilePath)) {
-            $evidence =  "File not found: $FilePath"
-            }
-        else {
-            # Read the contents of the file
-            $fileContent = Get-Content -Path $FilePath -Encoding Byte
+ # Check if the file exists
+ if (-not (Test-Path $FilePath)) {
+     $evidence =  "File not found: $FilePath"
+ }
+ else {
+     # Read the contents of the file
+     $fileContent = Get-Content -Path $FilePath -Encoding Byte
       
-           # Convert the file content to a base64 string
-            $base64String = [System.Convert]::ToBase64String($fileContent)
-            $evidence = "File $FilePath found"
-            $result = $true
-            }
-
+     # Convert the file content to a base64 string
+     $base64String = [System.Convert]::ToBase64String($fileContent)
+     $evidence = "File $FilePath found"
+     $result = $true
+}
 
 # Output the result
 $Evidence
