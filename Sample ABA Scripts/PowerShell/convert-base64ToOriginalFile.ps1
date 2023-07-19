@@ -24,13 +24,6 @@ param (
     [Parameter(Mandatory=$true, HelpMessage="Enter the path where the document/file will be saved.")]
     [string]$OutputFilePath
 )
-param (
-    [Parameter(Mandatory=$true)]
-    [string]$Base64String,
-
-    [Parameter(Mandatory=$true)]
-    [string]$OutputFilePath
-)
 
 function ConvertFrom-Base64String {
     param (
