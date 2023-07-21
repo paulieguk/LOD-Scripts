@@ -1,3 +1,6 @@
+#This script can be used to rename a Linux VM based on the last Octect of the IP Address.
+#This also can create a variable for the VM Name so it can be used in the instructions or other scripts.
+
 #!/bin/bash
 
 while true; do
