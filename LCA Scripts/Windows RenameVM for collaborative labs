@@ -1,5 +1,5 @@
 #This script can be used to rename a Windows VM based on the last Octect of the IP Address.
-#This also can create a variuiable for the VM Name so it can be used in the instructions or other scripts.
+#This also can create a variable for the VM Name so it can be used in the instructions or other scripts.
 
 do {
 $ip = (Get-NetIPAddress | Where-Object {($_.AddressFamily -eq "IPv4") -and ($_.IPAddress -like "192.168.1.*")}).IPAddress
