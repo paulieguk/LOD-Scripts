@@ -1,0 +1,13 @@
+#This script can be used to rename a Windows VM based on the last Octect of the IP Address.
+#This also can create a variuiable for the VM Name so it can be used in the instructions or other scripts.
+
+do {
+$ip = (Get-NetIPAddress | Where-Object {($_.AddressFamily -eq "IPv4") -and ($_.IPAddress -like "192.168.1.*")}).IPAddress
+}
+until ($ip -like "192.168.1.*")
+[String]$lastOctet = $ip.Split(".")[-1]
+If ($lastOctet -lt 110){$studentName = "student00" + $lastOctet.Substring(2)}
+If ($lastOctet -ge 110){$studentName = "student0" + $lastOctet.Substring(1)}
+Rename-Computer -NewName $studentname -Force -Restart
+Set-LabVariable -Name "WStudentName" -Value $studentName
+
