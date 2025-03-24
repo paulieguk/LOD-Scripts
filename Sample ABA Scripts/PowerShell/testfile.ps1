@@ -2,7 +2,7 @@
 $result = $false
 
 # Query variables. Modify these to match the lab environment.
-$file = "${ENV:USERPROFILE}\Documents\output.txt"
+$file = "C:\Labfiles\output.txt"
 $evidence = "The file $file was not found"
 
 
